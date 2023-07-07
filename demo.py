@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 with open('demo.csv', mode ='r')as file:
     csvFile = csv.reader(file)
     
-    for cid in csvFile:
+    for client in csvFile:
         print(cid)
         cnxn_str = ("Driver={SQL Server};"
             "Server=192.168.0.34,7998;"
@@ -21,11 +21,9 @@ with open('demo.csv', mode ='r')as file:
         print("connected")
         cursor = cnxn.cursor()
         #id1=lines id=str(lines)
-        id1=cid[0]
-        id1=str(id1)
-        print(id1)
+        cid=str(client[0])
 
-        query="select Name,Date_Birth,email from ET_M_EMPLOYEE where CID=" + id1 + " and Date_Birth is Not NULL and email is NOT NULL and Name like '%S'"
+        query="select Name,Date_Birth,email from ET_M_EMPLOYEE where CID=" + cid + " and Date_Birth is Not NULL and (email is NOT NULL or email <> '')"
 
         data=cursor.execute(query)
         result = cursor.fetchall()
