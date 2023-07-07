@@ -11,14 +11,12 @@ with open('demo.csv', mode ='r')as file:
     csvFile = csv.reader(file)
     
     for client in csvFile:
-        print(cid)
         cnxn_str = ("Driver={SQL Server};"
             "Server=192.168.0.34,7998;"
             "Database=ETAM_WEB_TAJ;"
             "UID=sa;"
             "PWD=@Admin123$$;")
         cnxn = pyodbc.connect(cnxn_str)
-        print("connected")
         cursor = cnxn.cursor()
         #id1=lines id=str(lines)
         cid=str(client[0])
@@ -68,7 +66,6 @@ with open('demo.csv', mode ='r')as file:
                 msg.attach(MIMEText(message, 'html'))
                 message1=msg.as_string()
 
-                print(BirthdayBoy)
                 s.sendmail("attendanceportal@sentry.co.in", i[2], message1)
                 s.close()
             elif BirthdayBoy:
@@ -87,8 +84,6 @@ Your Colleague """ + BirthdayBoy[0] + """ has a birthday Today
 Regards,
 WYSE Biometrics Systems
 """
-                print(BirthdayBoy)
-                print(i[2])
                 s.sendmail("attendanceportal@sentry.co.in", i[2], message)
                 s.close()
 
